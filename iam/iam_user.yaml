@@ -1,0 +1,8 @@
+
+Resources:
+  MyIAMUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: 'cloudformation-enthusiast'
+      LoginProfile:
+        Password: '{{resolve:ssm-secure:/iam/userPassword}}' # Read password from parameter store Secure String

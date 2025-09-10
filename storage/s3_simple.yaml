@@ -1,0 +1,5 @@
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-cloudformation-s3-bucket-demo-asdash-djashx-kjhask-2313

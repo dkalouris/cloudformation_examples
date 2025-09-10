@@ -1,0 +1,17 @@
+Resources:
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access
+      SecurityGroupIngress: 
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0 # Not safe, replace with hardcoded IP or parameter store value for IP
+
+Outputs:
+  MySSHSecurityGroup:
+    Value: !Ref MySecurityGroup
+    Description: Id of the SSH security groups that allows ssh traffic
+    Export:
+      Name: MySSHSecurityGroup
