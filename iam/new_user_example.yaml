@@ -1,0 +1,35 @@
+Parameters:
+  UserName:
+    Type: String
+    Description: Unique name for the IAM user (e.g., "bob")
+
+Resources:
+  UserBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${UserName}-bucket"
+
+  MyIAMUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: !Ref UserName
+      LoginProfile:
+        Password: '{{resolve:ssm-secure:/iam/userPassword}}' # Read password from parameter store Secure String
+
+  UserBucketPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub "${UserName}-bucket-access"
+      Users:
+        - !Ref MyIAMUser
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - "s3:ListBucket"
+            Resource: !GetAtt UserBucket.Arn
+          - Effect: Allow
+            Action:
+              - "s3:*"
+            Resource: !Sub "${UserBucket.Arn}/*"
