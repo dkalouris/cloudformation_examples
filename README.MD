@@ -9,7 +9,7 @@ Each template is written in either JSON and is focused on solving a specific use
 Templates are organized by category or service, for example:
 
 - `compute/` – EC2 instance examples  
-- `compute/` – S3 bucket configurations 
+- `storage/` – S3 bucket configurations 
 - `iam/` – IAM roles, policies, and users  
 
 ## 🚧 Work in Progress
